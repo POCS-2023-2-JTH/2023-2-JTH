@@ -10,6 +10,7 @@ __FE__
 - React.js
 
 __BE__
+- Java
 - Spring Web
 - Spring data JPA
 - MariaDB
