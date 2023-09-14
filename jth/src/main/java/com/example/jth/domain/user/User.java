@@ -1,4 +1,4 @@
-package com.example.domain.user;
+package com.example.jth.domain.user;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -21,7 +21,8 @@ public class User {
     private Gender gender;
     private String phoneNumber;
 
-    public User(String name, String password, Gender gender, String phoneNumber) {
+    public User(String userId, String name, String password, Gender gender, String phoneNumber) {
+        this.userId = userId;
         this.name = name;
         this.password = password;
         this.gender = gender;
