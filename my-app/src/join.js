@@ -105,7 +105,7 @@ export default function Join(){
                 userName:Name,
                 userId:Id, 
                 userPw:Password, 
-
+                userGender:Gender, 
                 userTel:Tel
             })
             .then((response) => {
