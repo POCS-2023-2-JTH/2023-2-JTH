@@ -4,10 +4,14 @@ import com.example.jth.domain.user.Gender;
 import com.example.jth.domain.user.User;
 import com.example.jth.dto.join.JoinRequest;
 import com.example.jth.dto.join.JoinResponse;
+import com.example.jth.exception.DuplicateJoinException;
+import com.example.jth.exception.ErrorCode;
 import com.example.jth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -16,12 +20,16 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public JoinResponse join(JoinRequest joinRequest){
+    public JoinResponse join(JoinRequest joinRequest) {
         String userId = joinRequest.getUserId();
         String name = joinRequest.getName();
         String password = joinRequest.getPassword();
         Gender gender = joinRequest.getGender();
         String phoneNumber = joinRequest.getPhoneNumber();
+
+        Optional<User> foundUser = userRepository.findByUserId(userId);
+        if (foundUser.isPresent())
+            throw new DuplicateJoinException("이미 가입한 회원입니다.", ErrorCode.JOIN_DUPLICATION);
 
         User user = new User(userId, name, password, gender, phoneNumber);
         Long id = userRepository.save(user).getId();
