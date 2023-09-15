@@ -17,6 +17,7 @@ public class JoinRequest {
     @NotBlank
     private String name;
     @Pattern(regexp = RegexConstantUtil.PASSWORD_REGEX, message = "잘못된 비밀번호 형식입니다.")
+    @NotBlank
     private String password;
     @NotNull
     private Gender gender;
