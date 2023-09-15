@@ -6,6 +6,8 @@ import com.example.jth.dto.join.JoinRequest;
 import com.example.jth.dto.join.JoinResponse;
 import com.example.jth.dto.user_detail.UserDetailResponse;
 import com.example.jth.dto.user_leave.UserLeaveRequest;
+import com.example.jth.dto.user_update.UserUpdateRequest;
+import com.example.jth.dto.user_update.UserUpdateResponse;
 import com.example.jth.exception.user.DuplicateJoinException;
 import com.example.jth.exception.ErrorCode;
 import com.example.jth.exception.user.UserNotFoundException;
@@ -49,6 +51,12 @@ public class UserService {
         userRepository.delete(user);
     }
 
+    @Transactional
+    public UserUpdateResponse updateUserDetail(UserUpdateRequest request){
+        User user = findById(request.getId());
+        user.update(request);
+        return new UserUpdateResponse(user.getId());
+    }
 
     private User findById(Long id) {
         return userRepository.findById(id)
