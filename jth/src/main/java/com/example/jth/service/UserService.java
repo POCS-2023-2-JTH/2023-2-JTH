@@ -4,8 +4,10 @@ import com.example.jth.domain.user.Gender;
 import com.example.jth.domain.user.User;
 import com.example.jth.dto.join.JoinRequest;
 import com.example.jth.dto.join.JoinResponse;
-import com.example.jth.exception.DuplicateJoinException;
+import com.example.jth.dto.user_detail.UserDetailResponse;
+import com.example.jth.exception.user.DuplicateJoinException;
 import com.example.jth.exception.ErrorCode;
+import com.example.jth.exception.user.UserNotFoundException;
 import com.example.jth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,13 @@ public class UserService {
         User user = new User(userId, name, password, gender, phoneNumber);
         Long id = userRepository.save(user).getId();
         return new JoinResponse(id);
+    }
+
+    public UserDetailResponse getUserDetail(Long id){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("존재하지 않는 회원입니다.", ErrorCode.USER_NOT_FOUND));
+
+        return UserDetailResponse.from(user);
     }
 
 }
