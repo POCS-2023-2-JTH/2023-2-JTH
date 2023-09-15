@@ -13,7 +13,8 @@ public enum ErrorCode {
     HANDLE_ACCESS_DENIED(403, "C006", "Access is Denied"),
 
     // User
-    JOIN_DUPLICATION(400, "M001", "Duplicated Join Request");
+    JOIN_DUPLICATION(400, "M001", "Duplicated Join Request"),
+    USER_NOT_FOUND(400, "M002", "User Not Found");
 
     private final String code;
     private final String message;
