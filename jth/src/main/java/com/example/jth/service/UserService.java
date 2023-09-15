@@ -5,6 +5,7 @@ import com.example.jth.domain.user.User;
 import com.example.jth.dto.join.JoinRequest;
 import com.example.jth.dto.join.JoinResponse;
 import com.example.jth.dto.user_detail.UserDetailResponse;
+import com.example.jth.dto.user_leave.UserLeaveRequest;
 import com.example.jth.exception.user.DuplicateJoinException;
 import com.example.jth.exception.ErrorCode;
 import com.example.jth.exception.user.UserNotFoundException;
@@ -38,11 +39,19 @@ public class UserService {
         return new JoinResponse(id);
     }
 
-    public UserDetailResponse getUserDetail(Long id){
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("존재하지 않는 회원입니다.", ErrorCode.USER_NOT_FOUND));
-
+    public UserDetailResponse getUserDetail(Long id) {
+        User user = findById(id);
         return UserDetailResponse.from(user);
     }
 
+    public void userLeave(UserLeaveRequest request) {
+        User user = findById(request.getId());
+        userRepository.delete(user);
+    }
+
+
+    private User findById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("존재하지 않는 회원입니다.", ErrorCode.USER_NOT_FOUND));
+    }
 }
