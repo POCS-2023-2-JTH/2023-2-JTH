@@ -16,9 +16,9 @@ public class DefaultExceptionHandler {
      * 검증 에러
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
+    protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         log.error("handleMethodArgumentNotValidException", e);
-        final ErrorResponse response=ErrorResponse.of(ErrorCode.INVALID_INPUT_VALUE, e.getBindingResult());
+        final ErrorResponse response = ErrorResponse.of(ErrorCode.INVALID_INPUT_VALUE, e.getBindingResult());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
@@ -26,9 +26,9 @@ public class DefaultExceptionHandler {
      * enum type 불일치 에러
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    protected ResponseEntity<ErrorResponse> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e){
+    protected ResponseEntity<ErrorResponse> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
         log.error("handleMethodArgumentTypeMismatchException", e);
-        final ErrorResponse response=ErrorResponse.of(e);
+        final ErrorResponse response = ErrorResponse.of(e);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
@@ -36,20 +36,20 @@ public class DefaultExceptionHandler {
      * 지원하지 않는 HTTP Method 에러
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    protected ResponseEntity<ErrorResponse> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e){
+    protected ResponseEntity<ErrorResponse> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
         log.error("handleHttpRequestMethodNotSupportedException", e);
-        final ErrorResponse response=ErrorResponse.of(ErrorCode.METHOD_NOT_ALLOWED);
+        final ErrorResponse response = ErrorResponse.of(ErrorCode.METHOD_NOT_ALLOWED);
         return new ResponseEntity<>(response, HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     /**
-     * 중복 회원 가입 에러
+     * 비즈니스 에러
      */
-    @ExceptionHandler(DuplicateJoinException.class)
-    protected ResponseEntity<ErrorResponse> handleDuplicateJoinException(DuplicateJoinException e){
+    @ExceptionHandler(BusinessException.class)
+    protected ResponseEntity<ErrorResponse> handleDuplicateJoinException(BusinessException e) {
         log.error("duplicateJoinException", e);
-        final ErrorCode errorCode=e.getErrorCode();
-        final ErrorResponse response=ErrorResponse.of(errorCode);
+        final ErrorCode errorCode = e.getErrorCode();
+        final ErrorResponse response = ErrorResponse.of(errorCode);
         return new ResponseEntity<>(response, HttpStatus.valueOf(errorCode.getStatus()));
     }
 }
