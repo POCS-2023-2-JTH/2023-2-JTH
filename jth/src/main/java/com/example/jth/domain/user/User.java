@@ -1,5 +1,6 @@
 package com.example.jth.domain.user;
 
+import com.example.jth.dto.user_update.UserUpdateRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,5 +28,12 @@ public class User {
         this.password = password;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
+    }
+
+    public void update(UserUpdateRequest request){
+        this.userId=request.getUserId();
+        this.name=request.getName();
+        this.password=request.getPassword();
+        this.phoneNumber=request.getPhoneNumber();
     }
 }
