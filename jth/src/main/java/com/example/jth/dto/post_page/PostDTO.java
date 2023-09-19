@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 @Getter
 public class PostDTO {
+    private final Long id;
     private final Category category;
     private final String title;
     private final String content;
