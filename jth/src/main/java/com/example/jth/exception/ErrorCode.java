@@ -14,7 +14,10 @@ public enum ErrorCode {
 
     // User
     JOIN_DUPLICATION(400, "M001", "Duplicated Join Request"),
-    USER_NOT_FOUND(400, "M002", "User Not Found");
+    USER_NOT_FOUND(400, "M002", "User Not Found"),
+
+    // Post
+    POST_NOT_FOUND(400, "P001", "Post Not Found");
 
     private final String code;
     private final String message;
