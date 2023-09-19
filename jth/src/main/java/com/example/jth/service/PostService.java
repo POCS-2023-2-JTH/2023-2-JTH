@@ -4,6 +4,8 @@ import com.example.jth.domain.post.Post;
 import com.example.jth.dto.post_page.PostDTO;
 import com.example.jth.dto.post_page.PostPageRequest;
 import com.example.jth.dto.post_page.PostPageResponse;
+import com.example.jth.exception.ErrorCode;
+import com.example.jth.exception.post.PostNotFoundException;
 import com.example.jth.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -24,6 +26,7 @@ public class PostService {
         PageRequest pageRequest = PageRequest.of(request.getPage(), request.getSize());
         Page<Post> page = postRepository.findAll(pageRequest);
         List<PostDTO> posts = page.getContent().stream().map(post -> new PostDTO(
+                post.getId(),
                 post.getCategory(),
                 post.getTitle(),
                 post.getContent(),
@@ -34,4 +37,21 @@ public class PostService {
 
         return new PostPageResponse(page, posts);
     }
+
+    public PostDTO getPost(Long postId){
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new PostNotFoundException("해당 게시글이 존재하지 않습니다.", ErrorCode.POST_NOT_FOUND));
+
+        return new PostDTO(
+                post.getId(),
+                post.getCategory(),
+                post.getTitle(),
+                post.getContent(),
+                post.getCreated(),
+                post.getUser().getId(),
+                post.getUser().getName()
+        );
+    }
+
+
 }
