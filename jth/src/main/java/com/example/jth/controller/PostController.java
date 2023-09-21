@@ -1,5 +1,7 @@
 package com.example.jth.controller;
 
+import com.example.jth.dto.add_post.AddPostRequest;
+import com.example.jth.dto.add_post.AddPostResponse;
 import com.example.jth.dto.post_page.PostDTO;
 import com.example.jth.dto.post_page.PostPageRequest;
 import com.example.jth.dto.post_page.PostPageResponse;
@@ -8,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -28,6 +31,12 @@ public class PostController {
     public ResponseEntity<PostDTO> getPost(@PathVariable @Positive Long postId){
         PostDTO response = postService.getPost(postId);
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/post/write")
+    public ResponseEntity<AddPostResponse> addPost(@Valid AddPostRequest request){
+        AddPostResponse response = postService.addPost(request);
+        return ResponseEntity.accepted().body(response);
     }
 
 }
