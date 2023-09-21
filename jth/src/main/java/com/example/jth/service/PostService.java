@@ -7,6 +7,7 @@ import com.example.jth.dto.add_post.AddPostResponse;
 import com.example.jth.dto.post_page.PostDTO;
 import com.example.jth.dto.post_page.PostPageRequest;
 import com.example.jth.dto.post_page.PostPageResponse;
+import com.example.jth.dto.remove_post.DeletePostRequest;
 import com.example.jth.exception.ErrorCode;
 import com.example.jth.exception.post.PostNotFoundException;
 import com.example.jth.exception.user.UserNotFoundException;
@@ -28,7 +29,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
 
-    public PostPageResponse getPosts(PostPageRequest request){
+    public PostPageResponse getPosts(PostPageRequest request) {
         PageRequest pageRequest = PageRequest.of(request.getPage(), request.getSize());
         Page<Post> page = postRepository.findAll(pageRequest);
         List<PostDTO> posts = page.getContent().stream().map(post -> new PostDTO(
@@ -44,7 +45,7 @@ public class PostService {
         return new PostPageResponse(page, posts);
     }
 
-    public PostDTO getPost(Long postId){
+    public PostDTO getPost(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new PostNotFoundException("해당 게시글이 존재하지 않습니다.", ErrorCode.POST_NOT_FOUND));
 
@@ -60,12 +61,23 @@ public class PostService {
     }
 
     @Transactional
-    public AddPostResponse addPost(AddPostRequest request){
+    public AddPostResponse addPost(AddPostRequest request) {
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new UserNotFoundException("존재하지 않는 회원입니다.", ErrorCode.USER_NOT_FOUND));
         Post post = Post.from(request, user);
         Long id = postRepository.save(post).getId();
         return new AddPostResponse(id);
     }
+
+    @Transactional
+    public void deletePost(DeletePostRequest request) {
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new UserNotFoundException("존재하지 않는 회원입니다.", ErrorCode.USER_NOT_FOUND));
+        Post post = postRepository.findById(request.getPostId())
+                .orElseThrow(() -> new PostNotFoundException("해당 게시글이 존재하지 않습니다.", ErrorCode.POST_NOT_FOUND));
+        user.getWrotePosts().remove(post);
+        postRepository.delete(post);
+    }
+
 
 }
