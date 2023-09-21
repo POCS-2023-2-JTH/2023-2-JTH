@@ -1,12 +1,17 @@
 package com.example.jth.service;
 
 import com.example.jth.domain.post.Post;
+import com.example.jth.domain.user.User;
+import com.example.jth.dto.add_post.AddPostRequest;
+import com.example.jth.dto.add_post.AddPostResponse;
 import com.example.jth.dto.post_page.PostDTO;
 import com.example.jth.dto.post_page.PostPageRequest;
 import com.example.jth.dto.post_page.PostPageResponse;
 import com.example.jth.exception.ErrorCode;
 import com.example.jth.exception.post.PostNotFoundException;
+import com.example.jth.exception.user.UserNotFoundException;
 import com.example.jth.repository.PostRepository;
+import com.example.jth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,6 +26,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
 
     public PostPageResponse getPosts(PostPageRequest request){
         PageRequest pageRequest = PageRequest.of(request.getPage(), request.getSize());
@@ -53,5 +59,13 @@ public class PostService {
         );
     }
 
+    @Transactional
+    public AddPostResponse addPost(AddPostRequest request){
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new UserNotFoundException("존재하지 않는 회원입니다.", ErrorCode.USER_NOT_FOUND));
+        Post post = Post.from(request, user);
+        Long id = postRepository.save(post).getId();
+        return new AddPostResponse(id);
+    }
 
 }
