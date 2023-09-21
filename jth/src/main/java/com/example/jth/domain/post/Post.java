@@ -1,6 +1,7 @@
 package com.example.jth.domain.post;
 
 import com.example.jth.domain.user.User;
+import com.example.jth.dto.add_post.AddPostRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,5 +30,15 @@ public class Post {
         this.content = content;
         this.created = created;
         this.user = user;
+    }
+
+    public static Post from(AddPostRequest request, User user){
+        return new Post(
+                request.getCategory(),
+                request.getTitle(),
+                request.getContent(),
+                request.getCreated(),
+                user
+        );
     }
 }
