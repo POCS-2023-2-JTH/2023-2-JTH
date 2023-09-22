@@ -175,7 +175,7 @@ export default function Join(){
                     <div className="join-gender">
                         <label>성별</label>
                         <select name="gender"
-                        name="gender"
+                        // 오타 수정
                         value={Gender}
                         onChange={(e) => setGender(e.target.value)}
                         >
