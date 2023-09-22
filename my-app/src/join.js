@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from "react";
 import axios from 'axios';
+import './join.css'
 
 export default function Join(){ 
     const baseUrl = "http://localhost:8080";
@@ -174,7 +175,7 @@ export default function Join(){
                     <div className="join-gender">
                         <label>성별</label>
                         <select name="gender"
-                        name="gender"
+                        // 오타 수정
                         value={Gender}
                         onChange={(e) => setGender(e.target.value)}
                         >
