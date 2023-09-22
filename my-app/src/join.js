@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from "react";
 import axios from 'axios';
+import './join.css'
 
 export default function Join(){ 
     const baseUrl = "http://localhost:8080";
