@@ -1,17 +1,17 @@
-
-import Join from "./join.js"
-
-import Login from "./Login"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Join from "./join"; 
+import Login from "./Login"; 
+import BoardWrite from "./BoardWrite"; 
 
 function App() {
   return (
-    <div className="App">
-
-      <Join/>
-
-      <Login />
-
-    </div>
+  <Router>
+      <Routes>
+        <Route path="/join" element={<Join />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/boardwrite" element={<BoardWrite />} />
+      </Routes>
+  </Router>
   );
 }
 
