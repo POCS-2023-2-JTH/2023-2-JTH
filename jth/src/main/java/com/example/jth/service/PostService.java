@@ -9,6 +9,7 @@ import com.example.jth.dto.post_page.PostPageRequest;
 import com.example.jth.dto.post_page.PostPageResponse;
 import com.example.jth.dto.remove_post.DeletePostRequest;
 import com.example.jth.dto.search_post.SearchPostRequest;
+import com.example.jth.dto.update_post.UpdatePostRequest;
 import com.example.jth.exception.ErrorCode;
 import com.example.jth.exception.post.PostNotFoundException;
 import com.example.jth.exception.user.UserNotFoundException;
@@ -78,6 +79,13 @@ public class PostService {
         List<PostDTO> posts = mapPostToPostDTO(page);
 
         return new PostPageResponse(page, posts);
+    }
+
+    @Transactional
+    public void updatePost(UpdatePostRequest request){
+        Post post = postRepository.findById(request.getPostId())
+                .orElseThrow(() -> new PostNotFoundException("해당 게시글이 존재하지 않습니다.", ErrorCode.POST_NOT_FOUND));
+        post.update(request);
     }
 
     private List<PostDTO> mapPostToPostDTO(Page<Post> page){
