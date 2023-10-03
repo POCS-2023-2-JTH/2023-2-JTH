@@ -9,10 +9,7 @@ import com.example.jth.dto.remove_post.DeletePostRequest;
 import com.example.jth.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
@@ -36,13 +33,13 @@ public class PostController {
     }
 
     @PostMapping("/post/write")
-    public ResponseEntity<AddPostResponse> addPost(@Valid AddPostRequest request){
+    public ResponseEntity<AddPostResponse> addPost(@RequestBody @Valid AddPostRequest request){
         AddPostResponse response = postService.addPost(request);
         return ResponseEntity.accepted().body(response);
     }
 
     @PostMapping("/post/delete")
-    public ResponseEntity<Objects> deletePost(@Valid DeletePostRequest request){
+    public ResponseEntity<Objects> deletePost(@RequestBody @Valid DeletePostRequest request){
         postService.deletePost(request);
         return ResponseEntity.accepted().build();
     }
