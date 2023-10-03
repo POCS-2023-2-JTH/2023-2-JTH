@@ -2,6 +2,7 @@ package com.example.jth.domain.post;
 
 import com.example.jth.domain.user.User;
 import com.example.jth.dto.add_post.AddPostRequest;
+import com.example.jth.dto.update_post.UpdatePostRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,5 +41,11 @@ public class Post {
                 request.getCreated(),
                 user
         );
+    }
+
+    public void update(UpdatePostRequest request){
+        this.category=request.getCategory();
+        this.title=request.getTitle();
+        this.content=request.getContent();
     }
 }
