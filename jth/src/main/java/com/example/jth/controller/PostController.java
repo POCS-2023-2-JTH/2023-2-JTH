@@ -7,6 +7,7 @@ import com.example.jth.dto.post_page.PostPageRequest;
 import com.example.jth.dto.post_page.PostPageResponse;
 import com.example.jth.dto.remove_post.DeletePostRequest;
 import com.example.jth.dto.search_post.SearchPostRequest;
+import com.example.jth.dto.update_post.UpdatePostRequest;
 import com.example.jth.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -50,4 +51,11 @@ public class PostController {
         PostPageResponse response = postService.search(request);
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/post/update")
+    public ResponseEntity<Objects> updatePost(@RequestBody @Valid UpdatePostRequest request){
+        postService.updatePost(request);
+        return ResponseEntity.accepted().build();
+    }
+
 }
