@@ -8,6 +8,7 @@ import com.example.jth.dto.post_page.PostDTO;
 import com.example.jth.dto.post_page.PostPageRequest;
 import com.example.jth.dto.post_page.PostPageResponse;
 import com.example.jth.dto.remove_post.DeletePostRequest;
+import com.example.jth.dto.search_post.SearchPostRequest;
 import com.example.jth.exception.ErrorCode;
 import com.example.jth.exception.post.PostNotFoundException;
 import com.example.jth.exception.user.UserNotFoundException;
@@ -32,15 +33,7 @@ public class PostService {
     public PostPageResponse getPosts(PostPageRequest request) {
         PageRequest pageRequest = PageRequest.of(request.getPage(), request.getSize());
         Page<Post> page = postRepository.findAll(pageRequest);
-        List<PostDTO> posts = page.getContent().stream().map(post -> new PostDTO(
-                post.getId(),
-                post.getCategory(),
-                post.getTitle(),
-                post.getContent(),
-                post.getCreated(),
-                post.getUser().getId(),
-                post.getUser().getName()
-        )).collect(Collectors.toList());
+        List<PostDTO> posts = mapPostToPostDTO(page);
 
         return new PostPageResponse(page, posts);
     }
@@ -79,5 +72,23 @@ public class PostService {
         postRepository.delete(post);
     }
 
+    public PostPageResponse search(SearchPostRequest request){
+        PageRequest pageRequest = PageRequest.of(request.getPage(), request.getSize());
+        Page<Post> page = postRepository.findAllByTitleContaining(request.getQuery(), pageRequest);
+        List<PostDTO> posts = mapPostToPostDTO(page);
 
+        return new PostPageResponse(page, posts);
+    }
+
+    private List<PostDTO> mapPostToPostDTO(Page<Post> page){
+        return page.getContent().stream().map(post -> new PostDTO(
+                post.getId(),
+                post.getCategory(),
+                post.getTitle(),
+                post.getContent(),
+                post.getCreated(),
+                post.getUser().getId(),
+                post.getUser().getName()
+        )).collect(Collectors.toList());
+    }
 }
