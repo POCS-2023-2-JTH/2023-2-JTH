@@ -1,5 +1,6 @@
 package com.example.jth.controller;
 
+import com.example.jth.domain.post.Category;
 import com.example.jth.dto.add_post.AddPostRequest;
 import com.example.jth.dto.add_post.AddPostResponse;
 import com.example.jth.dto.post_page.PostDTO;
@@ -58,4 +59,8 @@ public class PostController {
         return ResponseEntity.accepted().build();
     }
 
+    @GetMapping("/category")
+    public ResponseEntity<Category[]> getCategories(){
+        return ResponseEntity.ok(Category.values());
+    }
 }
