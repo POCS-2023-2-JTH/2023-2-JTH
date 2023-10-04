@@ -1,5 +1,6 @@
 package com.example.jth.dto.search_post;
 
+import com.example.jth.dto.update_post.SearchCondition;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -19,4 +20,7 @@ public class SearchPostRequest {
     @Positive
     @NotNull
     private final Integer size;
+
+    @NotNull
+    private final SearchCondition condition;
 }
