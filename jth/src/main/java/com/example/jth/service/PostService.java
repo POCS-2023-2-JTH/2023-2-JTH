@@ -9,6 +9,7 @@ import com.example.jth.dto.post_page.PostPageRequest;
 import com.example.jth.dto.post_page.PostPageResponse;
 import com.example.jth.dto.remove_post.DeletePostRequest;
 import com.example.jth.dto.search_post.SearchPostRequest;
+import com.example.jth.dto.update_post.SearchCondition;
 import com.example.jth.dto.update_post.UpdatePostRequest;
 import com.example.jth.exception.ErrorCode;
 import com.example.jth.exception.post.PostNotFoundException;
@@ -75,7 +76,13 @@ public class PostService {
 
     public PostPageResponse search(SearchPostRequest request){
         PageRequest pageRequest = PageRequest.of(request.getPage(), request.getSize());
-        Page<Post> page = postRepository.findAllByTitleContaining(request.getQuery(), pageRequest);
+        SearchCondition condition=request.getCondition();
+        String query=request.getQuery();
+
+        Page<Post> page=condition.equals(SearchCondition.TITLE)?
+                postRepository.findAllByTitleContaining(query, pageRequest):
+                postRepository.findAllByUsername(query, pageRequest);
+
         List<PostDTO> posts = mapPostToPostDTO(page);
 
         return new PostPageResponse(page, posts);
