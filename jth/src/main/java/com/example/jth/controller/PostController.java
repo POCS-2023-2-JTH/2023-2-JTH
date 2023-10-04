@@ -8,6 +8,7 @@ import com.example.jth.dto.post_page.PostPageRequest;
 import com.example.jth.dto.post_page.PostPageResponse;
 import com.example.jth.dto.remove_post.DeletePostRequest;
 import com.example.jth.dto.search_post.SearchPostRequest;
+import com.example.jth.dto.update_post.SearchCondition;
 import com.example.jth.dto.update_post.UpdatePostRequest;
 import com.example.jth.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -62,5 +63,10 @@ public class PostController {
     @GetMapping("/category")
     public ResponseEntity<Category[]> getCategories(){
         return ResponseEntity.ok(Category.values());
+    }
+
+    @GetMapping("/search-condition")
+    public ResponseEntity<SearchCondition[]> getSearchConditions(){
+        return ResponseEntity.ok(SearchCondition.values());
     }
 }
