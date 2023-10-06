@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Join from "./join"; 
 import Login from "./Login"; 
-import BoardWrite from "./BoardWrite"; 
+import BoardCreate from "./BoardCreate"; 
+import BoardList from "./BoardList"; 
 
 function App() {
   return (
@@ -9,7 +10,9 @@ function App() {
       <Routes>
         <Route path="/join" element={<Join />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/boardwrite" element={<BoardWrite />} />
+        <Route path="/boardCreate" element={<BoardCreate />} />
+        {/* <Route path="/boardList" element={<BoardList />} /> */}
+        {/* <Route path="/board" element={<Board />} /> */}
       </Routes>
   </Router>
   );
