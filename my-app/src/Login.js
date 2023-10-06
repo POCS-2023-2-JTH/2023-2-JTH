@@ -52,7 +52,7 @@ export default function Login() {
         e.preventDefault();
 
         await axios
-            .post(baseUrl + "/" + "Login", {
+            .post(baseUrl + "/Login", {
                 userId: id,
                 userPw: password
             })
