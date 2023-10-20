@@ -103,11 +103,11 @@ export default function Join(){
 
         await axios
             .post(baseUrl + "/" + "join", {
-                userName:Name,
-                userId:Id, 
-                userPw:Password, 
-                userGender:Gender, 
-                userTel:Tel
+                name: Name,
+                userId: Id, 
+                password: Password, 
+                gender: Gender, 
+                phoneNumber: Tel
             })
             .then((response) => {
                 console.log(response.data)
