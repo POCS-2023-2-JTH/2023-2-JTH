@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios';
 
 export default function Login() {
-    const baseUrl = "http://13.124.86.174:8080";
+    //const baseUrl = "http://13.124.86.174:8080";
     //변수 초기화
     const [id, setId] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -52,7 +52,7 @@ export default function Login() {
         e.preventDefault();
 
         await axios
-            .post(baseUrl + "/" + "Login", {
+            .post("/" + "login", {
                 userId: id,
                 userPw: password
             })

@@ -24,7 +24,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/search" element={<SearchPage/> } />
+            <Route path="/post" element={<SearchPage/> } />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/join" element={<Join />} />
