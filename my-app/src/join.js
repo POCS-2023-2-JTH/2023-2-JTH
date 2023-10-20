@@ -4,7 +4,7 @@ import axios from 'axios';
 import './join.css'
 
 export default function Join(){ 
-    const baseUrl = "http://localhost:8080";
+    const baseUrl = "http://13.124.86.174:8080";
 
     //초기값 세팅
     const [Name, setName] = useState("");
