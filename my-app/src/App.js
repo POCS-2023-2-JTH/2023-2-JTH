@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/join" element={<Join />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/boardCreate" element={<BoardCreate />} />
+        <Route path="/post/write" element={<BoardCreate />} />
         {/* <Route path="/boardList" element={<BoardList />} /> */}
         {/* <Route path="/board" element={<Board />} /> */}
       </Routes>

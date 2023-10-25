@@ -4,14 +4,14 @@ import axios from 'axios';
 import './join.css'
 
 export default function Join(){ 
-    const baseUrl = "http://13.124.86.174:8080";
+    //const baseUrl = "http://13.124.86.174:8080";
 
     //초기값 세팅
     const [Name, setName] = useState("");
     const [Id, setId] = useState("");
     const [Password, setPassword] = useState("");
     const [PasswordConfirm, setPasswordConfirm] = React.useState("");
-    const [Gender, setGender] = useState("male"); // 기본값을 남성으로 설정
+    const [Gender, setGender] = useState("MALE"); // 기본값을 남성으로 설정
     const [Tel, setTel] = useState("");
 
     // 오류메세지 상태 저장
@@ -102,7 +102,7 @@ export default function Join(){
         e.preventDefault();
 
         await axios
-            .post(baseUrl + "/" + "join", {
+            .post('http://13.124.86.174:8080/join', {
                 name: Name,
                 userId: Id, 
                 password: Password, 
@@ -116,11 +116,57 @@ export default function Join(){
                 console.log(error);
             });
     }
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    
+    //     const dummyData = {
+    //         name: "김김민재",
+    //         userId: "mj3242",
+    //         password: "Anminjae55!",
+    //         gender: "MALE",
+    //         phoneNumber: "010-2222-3333"
+    //     };
+    
+    //     await axios
+    //     .post('http://13.124.86.174:8080/join', dummyData, {
+    //         headers: {
+    //             'Content-Type': 'application/json; charset=utf-8;', //통신 오류 -> 한글 incoding 코드 추가
+    //         },
+    //     })
+    //     .then((response) => {
+    //         console.log(response.data)
+    //     })
+    //     .catch((error) => {
+    //         alert(JSON.stringify(error.response.data)); //추가 
+    //         console.log(error);
+    //     });
+    
+    // }
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    
+    //     const dummyData = {
+    //         name: "김김민재",
+    //         userId: "mj3242",
+    //         password: "Anminjae55!",
+    //         gender: "male",
+    //         phoneNumber: "010-2222-3333"
+    //     };
+    
+    //     try {
+    //         const response = await axiosInstance.post('/join', dummyData);
+    //         console.log(response.data);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
+    
+    
 
     return(
         <div className="join-mainFrame">
             <div className="join-subFrame">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} method="POST">
                     <div className="join-name">
                         <label>이름</label>
                         <input
@@ -179,8 +225,8 @@ export default function Join(){
                         value={Gender}
                         onChange={(e) => setGender(e.target.value)}
                         >
-                            <option value="male">남성</option>
-                            <option value="female">여성</option>
+                            <option value="MALE">남성</option>
+                            <option value="FEMALE">여성</option>
                         </select>
                     </div>
 
