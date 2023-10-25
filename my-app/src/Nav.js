@@ -5,6 +5,7 @@ import "./Nav.css"
 
 export default function Nav() {
     const [searchValue, setSearchValue] = useState("");
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
 
     const logoClick = () => {
@@ -24,11 +25,15 @@ export default function Nav() {
         navigate("/join");
     };
 
+    const myPageClick = () => {
+        navigate(`/user/detail/mj2252`); //여기 바꿔
+    };
+
     return (
         <nav className="nav">
-            <div 
-            className="nav__title"
-            onClick={logoClick}
+            <div
+                className="nav__title"
+                onClick={logoClick}
             >부기 커뮤니티
             </div>
 
@@ -44,20 +49,32 @@ export default function Nav() {
                 <div className="nav__form-el1">
                     <button type="button" className="nav__write-btn">게시글 등록</button>
                 </div>
-                <div className="nav__form-el">
-                    <button 
-                    type="button" 
-                    className="nav__login-btn"
-                    onClick={loginClick}
-                    >로그인</button>
-                </div>
-                <div className="nav__form-el">
-                    <button 
-                    type="button" 
-                    className="nav__join-btn"
-                    onClick={joinClick}
-                    >회원가입</button>
-                </div>
+
+                {isLoggedIn ? (
+                    <button
+                        type="button"
+                        className="myPage-btn"
+                        onClick={myPageClick}
+                    >마이페이지</button>
+                ) : (
+                    <>
+                        <div className="nav__form-el">
+                            <button
+                                type="button"
+                                className="nav__login-btn"
+                                onClick={loginClick}
+                            >로그인</button>
+                        </div>
+                        <div className="nav__form-el">
+                            <button
+                                type="button"
+                                className="nav__join-btn"
+                                onClick={joinClick}
+                            >회원가입</button>
+                        </div>
+                    </>
+                )}
+
             </form>
 
         </nav>
