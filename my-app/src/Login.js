@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UserIdDisPatch } from './App';
 import axios from 'axios';
 
-export default function Login() {
+export default function Login() { 
+    const userIdDispatch = useContext(UserIdDisPatch);
     //const baseUrl = "http://13.124.86.174:8080";
     //변수 초기화
     const [id, setId] = React.useState("");
@@ -52,11 +54,12 @@ export default function Login() {
         e.preventDefault();
 
         await axios
-            .post("/" + "login", {
+            .post("http://13.124.86.174:8080/login", {
                 userId: id,
                 userPw: password
             })
             .then((response) => {
+                userIdDispatch({ type: 'SET_USER_ID', payload: id });
                 console.log(response.data)
             })
             .catch((error) => {
@@ -69,7 +72,7 @@ export default function Login() {
             <div className='login-subFrame'>
                 <div className='title'>부기 커뮤니티</div>
                 <div>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} method="post">
                         <div className='form-el'>
                             <input type='text' className='id' placeholder='아이디' name='id' value={id} onChange={onChangeId} />
                             <p className='message'>{idMessage}</p>
