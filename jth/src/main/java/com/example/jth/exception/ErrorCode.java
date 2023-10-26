@@ -12,12 +12,17 @@ public enum ErrorCode {
     INVALID_TYPE_VALUE(400, "C005", " Invalid Type Value"),
     HANDLE_ACCESS_DENIED(403, "C006", "Access is Denied"),
 
+    UNAUTHORIZED(401, "C007", "Not Authorized"),
+
     // User
     JOIN_DUPLICATION(400, "M001", "Duplicated Join Request"),
     USER_NOT_FOUND(400, "M002", "User Not Found"),
 
     // Post
-    POST_NOT_FOUND(400, "P001", "Post Not Found");
+    POST_NOT_FOUND(400, "P001", "Post Not Found"),
+
+    // Login
+    PASSWORD_NOT_EQUAL(400, "L001", "Password Not Equal");
 
     private final String code;
     private final String message;
