@@ -57,8 +57,8 @@ public class DefaultExceptionHandler {
      * 비즈니스 에러
      */
     @ExceptionHandler(BusinessException.class)
-    protected ResponseEntity<ErrorResponse> handleDuplicateJoinException(BusinessException e) {
-        log.error("duplicateJoinException", e);
+    protected ResponseEntity<ErrorResponse> handleBusinessException(BusinessException e) {
+        log.error("handleBusinessException", e);
         final ErrorCode errorCode = e.getErrorCode();
         final ErrorResponse response = ErrorResponse.of(errorCode);
         return new ResponseEntity<>(response, HttpStatus.valueOf(errorCode.getStatus()));
