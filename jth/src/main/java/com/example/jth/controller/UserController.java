@@ -7,13 +7,15 @@ import com.example.jth.dto.user_leave.UserLeaveRequest;
 import com.example.jth.dto.user_update.UserUpdateRequest;
 import com.example.jth.dto.user_update.UserUpdateResponse;
 import com.example.jth.service.UserService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.net.URI;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,8 +25,7 @@ public class UserController {
     @PostMapping("/join")
     public ResponseEntity<JoinResponse> join(@RequestBody @Valid JoinRequest joinRequest) {
         JoinResponse response = userService.join(joinRequest);
-        URI uri = URI.create("/user/detail/" + response.getId());
-        return ResponseEntity.created(uri).body(response);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/user/detail/{id}")
