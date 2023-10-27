@@ -25,62 +25,6 @@ export default function BoardCreate(){
         });
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-        
-    //     try {
-    //         const created = new Date(`${year}-${month}-${day}`).toISOString().split('T')[0]; 
-    
-    //         const postData = {
-    //             category,
-    //             title,
-    //             content,
-    //             created,
-    //             userId
-    //         };
-    
-    //         await axios
-    //         .post('http://13.124.86.174:8080/post/write', postData)
-    //         .then((response) => {
-    //             console.log(response.data)
-    //         });
-    //     } catch (error) { //백엔드로부터 에러 응답이 오면 프론트단에서 메시지와 상태 코드를 띄워줌
-    //         if (error.response && error.response.data) {
-    //             const { message, status } = error.response.data;
-    //             alert(`에러 메시지: ${message}, 상태 코드: ${status}`);
-    //         }
-    //     }
-    //     console.log(board); //확인용 console
-    // };
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-        
-    //     const created = new Date(`${year}-${month}-${day}`).toISOString().split('T')[0]; 
-    
-    //     const postData = {
-    //         category,
-    //         title,
-    //         content,
-    //         created,
-    //         userId
-    //     };
-    
-    //     axios
-    //     .post('http://13.124.86.174:8080/post/write', postData)
-    //     .then((response) => {
-    //         console.log(response.data);
-    //     })
-    //     .catch((error) => {
-    //         if (error.response && error.response.data) {
-    //             const { message, status } = error.response.data;
-    //             alert(`에러 메시지: ${message}, 상태 코드: ${status}`);
-    //         }
-    //     });
-    
-    //     console.log(board); // 확인용 console
-    // };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         
@@ -99,7 +43,7 @@ export default function BoardCreate(){
         };
     
         axios
-        .post('http://13.124.86.174:8080/post/write', postData)
+        .post('http://15.164.107.242:8080/post/write', postData)
         .then((response) => {
             console.log(response.data);
         })
@@ -113,8 +57,6 @@ export default function BoardCreate(){
         console.log(board); // 확인용 console
     };
     
-    
-
     return (
         <div>
             <form onSubmit={handleSubmit} method="POST">
