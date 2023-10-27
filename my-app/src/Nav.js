@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Nav.css"
+import axios from 'axios';
 
 
 export default function Nav() {
@@ -12,9 +13,19 @@ export default function Nav() {
         navigate("/");
     };
 
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
         setSearchValue(e.target.value);
-        navigate(`/post?q=${e.target.value}`);
+        navigate(`/post?query=${e.target.value}`);
+        /*
+        await axios
+            .get(`http://13.124.86.174:8080/post?query=${e.target.value}&page=0&size=10&condition=${e.target.value}`)
+            .then((response) => {
+                console.log(response.data)
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+            */
     };
 
     const loginClick = () => {
