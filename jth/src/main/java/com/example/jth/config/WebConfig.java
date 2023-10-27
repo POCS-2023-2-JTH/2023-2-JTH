@@ -27,6 +27,12 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/join", "/login");
+                .excludePathPatterns("/join", "/login",
+                        "/swagger-resources/**",
+                        "/swagger-ui/**",
+                        "/v2/api-docs",
+                        "/webjars/**",
+                        "/error/**",
+                        "/swagger-ui.html/**");
     }
 }
