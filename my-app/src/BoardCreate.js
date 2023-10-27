@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from "react";
 import axios from 'axios';
+import "./BoardCreate.css"; 
 
 export default function BoardCreate(){ 
     const [Id, setId] = useState("");
@@ -58,13 +59,13 @@ export default function BoardCreate(){
     };
     
     return (
-        <div>
+        <div className="main-frame">
             <form onSubmit={handleSubmit} method="POST">
-                <h2>게시글 작성</h2>
                 <div>
-                    <label>카테고리:</label>
                     <select 
+                        className="select"
                         id="category" 
+                        placeholder="카테고리"
                         value={category} 
                         onChange={(e) => onChange(e)} 
                         name="category"
@@ -76,8 +77,9 @@ export default function BoardCreate(){
                     </select>
                 </div>
                 <div>
-                    <label>제목:</label>
                     <input 
+                        className="title"
+                        placeholder="제목을 입력하세요"
                         type="text" 
                         id="title" 
                         value={title} 
@@ -87,8 +89,9 @@ export default function BoardCreate(){
                     />
                 </div>
                 <div>
-                    <label>내용:</label>
                     <textarea 
+                        className="content"
+                        placeholder="내용입력"
                         id="content" 
                         value={content} 
                         onChange={(e) => onChange(e)} 
@@ -99,7 +102,7 @@ export default function BoardCreate(){
                     />
                 </div>
                 <br />
-                <button type="submit">게시</button>  
+                <button className="button"type="submit">게시</button>  
             </form>
         </div>
     )
