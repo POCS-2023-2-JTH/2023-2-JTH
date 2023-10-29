@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Join from "./join"; 
+import Login from "./Login"; 
+import BoardCreate from "./BoardCreate"; 
+import BoardList from "./BoardList"; 
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <Router>
+      <Routes>
+        <Route path="/join" element={<Join />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/boardCreate" element={<BoardCreate />} />
+        {/* <Route path="/boardList" element={<BoardList />} /> */}
+        {/* <Route path="/board" element={<Board />} /> */}
+      </Routes>
+  </Router>
   );
 }
 
