@@ -51,6 +51,22 @@ export default function BoardDetail() {
         }
     };
 
+    const handleDelete = async () => {
+        try {
+            const response = await axios.post('http://15.164.107.242:8080/post/delete', {
+                postId: postId,
+                userId: post.userId  // 게시글을 작성한 사용자의 ID
+            });
+
+            if (response.status === 200) {
+                alert('게시글이 성공적으로 삭제되었습니다.');
+                window.location.href = '/';  // 메인 페이지로 이동
+            }
+        } catch (error) {
+            console.error('Failed to delete post:', error);
+        }
+    };
+
     if (!post) return null; // 게시글 데이터가 없는 경우 아무것도 렌더링하지 않음
 
     return (
@@ -68,7 +84,7 @@ export default function BoardDetail() {
                 </div>
                 <div className="board-btn">
                     <button onClick={moveToUpdate} className="board-update">{isEditing ? "완료" : "수정"}</button>
-                    <button className="board-delete">삭제</button>
+                    <button onClick={handleDelete} className="board-delete">삭제</button>
                 </div>
             </div>
             <div className="board-content">
