@@ -1,0 +1,64 @@
+p {
+  margin: 0;
+}
+
+button {
+  border: none;
+  background: none;
+}
+.board-box {
+  margin-top: 4.94rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.board-title {
+  color: #000;
+  font-family: Inter;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.1875rem; /* 109.375% */
+}
+
+.board-info-main {
+  margin-top: 1rem;
+  color: #000;
+  font-family: Inter;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  display: flex;
+  line-height: 2.1875rem; /* 145.833% */
+}
+
+.board-info {
+  display: flex;
+}
+
+.board-created {
+  margin-left: 3.56rem;
+}
+
+.board-btn {
+  margin-left: 57.25rem;
+}
+
+.board-btn button {
+  color: #000;
+  font-family: Inter;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.1875rem; /* 145.833% */
+}
+
+.board-content {
+  margin-top: 2.75rem;
+  color: #000;
+  font-family: Inter;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
