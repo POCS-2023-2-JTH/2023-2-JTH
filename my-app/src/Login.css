@@ -1,0 +1,76 @@
+.login-mainFrame {
+    position: relative;
+}
+
+.login-subFrame {
+    position: absolute;
+    top: 200px;
+    left: 35%;
+    margin: -50px 0 0 -50px;
+}
+
+.login-title {
+    height: 41px;
+    margin-bottom: 60px;
+    margin-left: 130px;
+
+    color: #2A37FF;
+    font-size: 42px;
+
+}
+
+.id {
+    width: 520px;
+    height: 60px;
+    flex-shrink: 0;
+
+    border-radius: 10px;
+    background: #58B2FF;
+    font-size: 18pt;
+}
+
+.password {
+    width: 520px;
+    height: 60px;
+    flex-shrink: 0;
+
+    border-radius: 10px;
+    background: #58B2FF;
+
+    font-size: 18pt;
+}
+
+.loginButton {
+
+    width: 520px;
+    height: 60px;
+    flex-shrink: 0;
+
+    border-radius: 40px;
+    background: #2A37FF;
+
+    font-size: 18pt;
+    box-shadow: 3px 3px 3px black;
+    color: white;
+}
+
+.loginButton:active {
+    margin-left: 5px;
+    margin-top: 5px;
+    box-shadow: none;
+}
+
+.join-box {
+    margin-top: 30px;
+}
+
+.joinButton {
+    width: 100px;
+    height: 30px;
+    margin-left: 240px;
+    border-radius: 40px;
+    border: 1px solid #2A37FF;
+
+    background: #FFF;
+
+}

@@ -1,17 +1,15 @@
 import React from 'react'
 import { useState } from "react";
 import axios from 'axios';
-import './join.css'
+import './Join.css';
 
-export default function Join(){ 
-    const baseUrl = "http://localhost:8080";
-
+export default function Join() {
     //초기값 세팅
     const [Name, setName] = useState("");
     const [Id, setId] = useState("");
     const [Password, setPassword] = useState("");
     const [PasswordConfirm, setPasswordConfirm] = React.useState("");
-    const [Gender, setGender] = useState("male"); // 기본값을 남성으로 설정
+    const [Gender, setGender] = useState("MALE"); // 기본값을 남성으로 설정
     const [Tel, setTel] = useState("");
 
     // 오류메세지 상태 저장
@@ -35,13 +33,13 @@ export default function Join(){
         const currentId = e.target.value;
         setId(currentId);
         const idRegExp = /^[a-zA-z0-9]{4,12}$/;
-     
+
         if (!idRegExp.test(currentId)) {
-          setIdMessage("4-12사이 대소문자 또는 숫자만 입력해 주세요!");
-          setIsId(false);
+            setIdMessage("4-12사이 대소문자 또는 숫자만 입력해 주세요!");
+            setIsId(false);
         } else {
-          setIdMessage("사용가능한 아이디 입니다.");
-          setIsId(true);
+            setIdMessage("사용가능한 아이디 입니다.");
+            setIsId(true);
         }
     };
 
@@ -49,41 +47,41 @@ export default function Join(){
         const currentPassword = e.target.value;
         setPassword(currentPassword);
         const passwordRegExp =
-          /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+            /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
         if (!passwordRegExp.test(currentPassword)) {
-          setPasswordMessage(
-            "숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!"
-          );
-          setIsPassword(false);
+            setPasswordMessage(
+                "숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!"
+            );
+            setIsPassword(false);
         } else {
-          setPasswordMessage("안전한 비밀번호 입니다.");
-          setIsPassword(true);
-        }
-    };
-     
-    const onChangePasswordConfirm = (e) => { //비밀번호 확인
-    const currentPasswordConfirm = e.target.value;
-        setPasswordConfirm(currentPasswordConfirm);
-        if (Password !== currentPasswordConfirm) {
-          setPasswordConfirmMessage("떼잉~ 비밀번호가 똑같지 않아요!");
-          setIsPasswordConfirm(false);
-        } else {
-          setPasswordConfirmMessage("똑같은 비밀번호를 입력했습니다.");
-          setIsPasswordConfirm(true);
+            setPasswordMessage("안전한 비밀번호 입니다.");
+            setIsPassword(true);
         }
     };
 
-    const onChangePhone = (getNumber) => {
+    const onChangePasswordConfirm = (e) => { //비밀번호 확인
+        const currentPasswordConfirm = e.target.value;
+        setPasswordConfirm(currentPasswordConfirm);
+        if (Password !== currentPasswordConfirm) {
+            setPasswordConfirmMessage("떼잉~ 비밀번호가 똑같지 않아요!");
+            setIsPasswordConfirm(false);
+        } else {
+            setPasswordConfirmMessage("똑같은 비밀번호를 입력했습니다.");
+            setIsPasswordConfirm(true);
+        }
+    };
+
+    const onChangePhone = (getNumber) => { //전화번호
         const currentPhone = getNumber;
         setTel(currentPhone);
         const phoneRegExp = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-     
+
         if (!phoneRegExp.test(currentPhone)) {
-          setPhoneMessage("올바른 형식이 아닙니다!");
-          setIsPhone(false);
+            setPhoneMessage("올바른 형식이 아닙니다!");
+            setIsPhone(false);
         } else {
-          setPhoneMessage("사용 가능한 번호입니다:-)");
-          setIsPhone(true);
+            setPhoneMessage("사용 가능한 번호입니다:-)");
+            setIsPhone(true);
         }
     };
 
@@ -92,115 +90,113 @@ export default function Join(){
         setTel(currentNumber);
         if (currentNumber.length === 3 || currentNumber.length === 8) {
             setTel(currentNumber + "-");
-          onChangePhone(currentNumber + "-");
+            onChangePhone(currentNumber + "-");
         } else {
-          onChangePhone(currentNumber);
+            onChangePhone(currentNumber);
         }
     };
-     
-    const handleSubmit = async (e) => {
+
+    const handleSubmit = async (e) => { //제출 핸들러 코드
         e.preventDefault();
 
         await axios
-            .post(baseUrl + "/" + "join", {
-                userName:Name,
-                userId:Id, 
-                userPw:Password, 
-                userGender:Gender, 
-                userTel:Tel
+            .post('http://15.164.107.242:8080/join', {
+                name: Name,
+                userId: Id,
+                password: Password,
+                gender: Gender,
+                phoneNumber: Tel
             })
             .then((response) => {
-                console.log(response.data)
+                console.log(response.data);
+                window.location.href = '/posts';
             })
             .catch((error) => {
                 console.log(error);
             });
     }
 
-    return(
+    return (
         <div className="join-mainFrame">
             <div className="join-subFrame">
-                <form onSubmit={handleSubmit}>
-                    <div className="join-name">
-                        <label>이름</label>
-                        <input
-                            type="text"
-                            className="join-name-input"
-                            placeholder="이름"
-                            name="name"
-                            value={Name}
-                            onChange={onChangeName} 
-                        />
-                    </div>
+                <h1 className="join-text">회원가입</h1>
+                <div className="join-smallFrame">
+                    <form onSubmit={handleSubmit} method="POST">
+                        <div className="join-name">
+                            <label>이름</label>
+                            <input
+                                type="text"
+                                className="join-name-input"
+                                name="name"
+                                value={Name}
+                                onChange={onChangeName}
+                            />
+                        </div>
 
-                    <div className="join-id">
-                        <label>아이디</label>
-                        <input
-                            type="text"
-                            className="join-id-input"
-                            placeholder="아이디"
-                            name="id"
-                            value={Id}
-                            onChange={onChangeId}
-                        />
-                        <p className="message"> {idMessage} </p>
-                    </div>
+                        <div className="join-id">
+                            <label>아이디</label>
+                            <input
+                                type="text"
+                                className="join-id-input"
+                                name="id"
+                                value={Id}
+                                onChange={onChangeId}
+                            />
+                            <p className="message"> {idMessage} </p>
+                        </div>
 
-                    <div className="join-pw">
-                        <label>비밀번호</label>
-                        <input
-                            type="password"
-                            className="join-pw-input"
-                            placeholder="비밀번호"
-                            name="pw"
-                            value={Password}
-                            onChange={onChangePassword}
-                        />
-                        <p className="message">{passwordMessage}</p>
-                    </div>
+                        <div className="join-pw">
+                            <label>비밀번호</label>
+                            <input
+                                type="password"
+                                className="join-pw-input"
+                                name="pw"
+                                value={Password}
+                                onChange={onChangePassword}
+                            />
+                            <p className="message">{passwordMessage}</p>
+                        </div>
 
-                    <div className="join-pw-check">
-                        <label>비밀번호확인</label>
-                        <input
-                            type="password"
-                            className="join-pw-check-input"
-                            placeholder="비밀번호확인"
-                            name="pw-check"
-                            value={PasswordConfirm}
-                            onChange={onChangePasswordConfirm}
-                        />
-                        <p className="message">{passwordConfirmMessage}</p>
-                    </div>
+                        <div className="join-pw-check">
+                            <label>비밀번호확인</label>
+                            <input
+                                type="password"
+                                className="join-pw-check-input"
+                                name="pw-check"
+                                value={PasswordConfirm}
+                                onChange={onChangePasswordConfirm}
+                            />
+                            <p className="message">{passwordConfirmMessage}</p>
+                        </div>
 
-                    <div className="join-gender">
-                        <label>성별</label>
-                        <select name="gender"
-                        // 오타 수정
-                        value={Gender}
-                        onChange={(e) => setGender(e.target.value)}
-                        >
-                            <option value="male">남성</option>
-                            <option value="female">여성</option>
-                        </select>
-                    </div>
+                        <div className="join-gender">
+                            <label>성별</label>
+                            <select name="gender"
+                                value={Gender}
+                                onChange={(e) => setGender(e.target.value)}
+                            >
+                                <option value="MALE">남성</option>
+                                <option value="FEMALE">여성</option>
+                            </select>
+                        </div>
 
-                    <div className="join-tel">
-                        <label>전화번호</label>
-                        <input
-                            type="text"
-                            className="join-tel-input"
-                            placeholder="전화번호"
-                            name="tel-check"
-                            value={Tel}
-                            onChange={addHyphen}
-                        />
-                         <p className="message">{phoneMessage}</p>
-                    </div>
+                        <div className="join-tel">
+                            <label>전화번호</label>
+                            <input
+                                type="text"
+                                className="join-tel-input"
+                                name="tel-check"
+                                value={Tel}
+                                onChange={addHyphen}
+                            />
+                            <p className="message">{phoneMessage}</p>
+                        </div>
 
-                    <div className="join-btn">
-                        <button type="submit">가입하기</button>
-                    </div>
-                </form>
+                        <div className="join-btn">
+                            <button type="submit">가입하기</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     )
