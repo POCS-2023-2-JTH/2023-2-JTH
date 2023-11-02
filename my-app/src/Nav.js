@@ -19,7 +19,7 @@ export default function Nav() {
     }, [state.userId]);
 
     const logoClick = () => {
-        navigate("/");
+        navigate("/posts");
     };
 
     const handleChange = async (e) => {

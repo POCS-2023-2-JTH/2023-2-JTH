@@ -47,12 +47,13 @@ export default function SearchPage() {
                     searchResults.map((post, index) => (
                         <li key={index}>
                             <div className='post_div' onClick={() => postClicked(post.id)}>
-                                <p className='__post-title'>{post.title}</p>
                                 <p className='__post-category'>{post.category}</p>
+                                <p className='__post-title'>{post.title}</p>
                                 <p className='__post-content'>{post.content}</p>
-                                <p className='__post-userName'>{post.userName}</p> 
+                                <p className='__post-userName'>{post.userName}</p>
+                                <p className='__post-created'>{post.created}</p>
                             </div>
-                            
+
                         </li>
                     ))
                 ) : (

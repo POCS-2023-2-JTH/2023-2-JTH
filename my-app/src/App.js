@@ -10,6 +10,7 @@ import React, { createContext, useReducer } from "react";
 import UserInformation from "./UserInformation";
 import BoardCreate from "./BoardCreate";
 import BoardDetail from "./BoardDetail";
+import Board from "./Board"
 
 
 const Layout = () => {
@@ -52,10 +53,11 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route path="/post" element={<SearchPage />} />
               <Route path="/post/:postId" element={<BoardDetail />} />
+              <Route path="/posts" element={<Board />} />
+              <Route path="/user/detail/:id" element={<UserInformation />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/join" element={<Join />} />
-            <Route path="/user/detail/:id" element={<UserInformation />} />
             <Route path="/post/write" element={<BoardCreate />} />
 
           </Routes>

@@ -1,10 +1,12 @@
 import React from 'react'
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import "./BoardCreate.css"; 
 
 export default function BoardCreate(){ 
     const [Id, setId] = useState("");
+    const navigate = useNavigate();
     
     const [board, setBoard] = useState({
         category: 'NOTICE', 
@@ -35,6 +37,8 @@ export default function BoardCreate(){
     
         const created = new Date(`${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`).toISOString().split('T')[0]; 
     
+        const userId = localStorage.getItem('userId');
+
         const postData = {
             category,
             title,
@@ -58,6 +62,10 @@ export default function BoardCreate(){
         console.log(board); // 확인용 console
     };
     
+    const writeclick = () => {
+        navigate("/posts");
+    }
+
     return (
         <div className="main-frame">
             <form onSubmit={handleSubmit} method="POST">
@@ -102,7 +110,7 @@ export default function BoardCreate(){
                     />
                 </div>
                 <br />
-                <button className="button"type="submit">게시</button>  
+                <button className="button"type="submit" onClick={writeclick}>게시</button>  
             </form>
         </div>
     )

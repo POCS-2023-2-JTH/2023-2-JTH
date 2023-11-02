@@ -1,6 +1,7 @@
 import { React, useEffect, useState, useContext } from 'react'
 import { UserIdDisPatch } from './App'
 import axios from 'axios';
+import "./UserInformation.css";
 
 function UserInformation() {
     /*
@@ -53,17 +54,16 @@ function UserInformation() {
         const fetchPost = async () => {
             try {
                 const userId = localStorage.getItem('userId');
-                
+
                 if (userId) {
                     const response = await axios.get(`http://15.164.107.242:8080/user/detail/${userId}`);
                     setUser(response.data);
-                    console.log("이부분실행되나연");
                 }
             } catch (error) {
                 console.error("오류 발생:", error);
             }
         }
-    
+
         fetchPost();
     }, []);
 
@@ -71,25 +71,27 @@ function UserInformation() {
 
     return (
         <div className='__userInformation-main'>
-            <div className='title'>회원 상세정보</div>
-            <div>
-                <div>이름</div>
-                <div className='__data-form' id='name'>{user.name}</div>
+            <div className='user-title'>회원 상세정보</div>
+            <div className="user-detail-main">
+                <div className="user-box">
+                    <div className='text'>이름</div>
+                    <div className='__data-form' id='name'>{user.name}</div>
+                </div>
 
-                <div>아이디</div>
-                <div className='__data-form' id='userId'>{user.userId}</div>
+                <div className="user-box">
+                    <div className='text'>아이디</div>
+                    <div className='__data-form' id='userId'>{user.userId}</div>
+                </div>
 
-                <div>비밀번호</div>
-                <div className='__data-form' id='password'>{user.password}</div>
-
-                <div>성별</div>
-                <div className='__data-form' id='gender'>{user.gender}</div>
-
-                <div>전화번호</div>
-                <div className='__data-form' id='phoneNumber'>{user.phoneNumber}</div>
+                <div className="user-box">
+                    <div className='text'>성별</div>
+                    <div className='__data-form' id='gender'>{user.gender}</div>
+                </div>
+                <div className="user-box">
+                    <div className='text'>전화번호</div>
+                    <div className='__data-form' id='phoneNumber'>{user.phoneNumber}</div>
+                </div>
             </div>
-            <button type='button'>수정</button>
-            <button type='button'>삭제</button>
         </div>
     )
 }
