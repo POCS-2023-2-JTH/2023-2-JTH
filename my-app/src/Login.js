@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import axios from 'axios';
+import './Login.css';
+import { useNavigate } from "react-router-dom";
+import { UserIdDisPatch } from './App'
 
 export default function Login() {
-    const baseUrl = "http://localhost:8080";
+    const { state, dispatch } = useContext(UserIdDisPatch);
+
+    useEffect(() => {
+        console.log(state);
+    }, [state]);
+
+    const navigate = useNavigate();
+
+    const baseUrl = "http://15.164.107.242:8080";
     //변수 초기화
     const [id, setId] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -48,28 +59,67 @@ export default function Login() {
         }
     };
 
+    /*
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         await axios
-            .post(baseUrl + "/" + "Login", {
+            .post(baseUrl + "/login", {
                 userId: id,
-                userPw: password
+                password: password
             })
             .then((response) => {
                 console.log(response.data)
+                dispatch({ type: 'SET_USER_ID', payload: response.data.userId });
+                localStorage.setItem('userId', response.data.userId);
+                console.log(state)
+                loginClick();
+
             })
             .catch((error) => {
                 console.log(error);
             });
     }
+    */
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post(baseUrl + "/login", {
+                userId: id,
+                password: password,
+            });
+
+            if (response.status === 200) {
+                console.log("로그인 성공:", response.data);
+                dispatch({ type: 'SET_USER_ID', payload: response.data.userId });
+                localStorage.setItem('userId', response.data.userId);
+                navigate("/");
+            } else {
+                console.log("로그인 실패:", response.data);
+            }
+        } catch (error) {
+            console.log("로그인 요청 중 오류 발생:", error);
+        }
+    }
+
+    /*
+    const loginClick = () => {
+        navigate("/");
+    };
+    */
+
+    const joinClick = () => {
+        navigate("/join");
+    };
 
     return (
         <div className='login-mainFrame'>
             <div className='login-subFrame'>
-                <div className='title'>부기 커뮤니티</div>
+                <div className='login-title'>부기 커뮤니티</div>
                 <div>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} method='post'>
                         <div className='form-el'>
                             <input type='text' className='id' placeholder='아이디' name='id' value={id} onChange={onChangeId} />
                             <p className='message'>{idMessage}</p>
@@ -80,10 +130,18 @@ export default function Login() {
                             <p className='message'>{passwordMessage}</p>
                         </div>
                         <br />
-                        <button type='submit' className='loginButton' disabled = {isId === false || isPassword === false ? true : false}>로그인</button>
-                        <div>
+                        <button
+                            type='submit'
+                            className='loginButton'
+                            disabled={isId === false || isPassword === false ? true : false
+                            }
+                        >로그인</button>
+                        <div className='join-box'>
                             아직 계정이 없으신가요?
-                            <button type='button' className='joinButton' >회원가입</button>
+                            <button
+                                type='button'
+                                className='joinButton'
+                                onClick={joinClick} >회원가입</button>
                         </div>
                     </form>
                 </div>

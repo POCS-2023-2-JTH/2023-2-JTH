@@ -1,0 +1,31 @@
+.__post-title {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.__post-category {
+    display: inline-block;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.__post-content {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.__post-userName {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.__post-created {
+    display: inline-block;
+    margin-right: 20px;
+    
+}
+
+.post_div {
+    cursor : pointer;
+    display: flex;
+}

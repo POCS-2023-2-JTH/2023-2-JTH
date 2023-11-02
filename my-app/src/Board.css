@@ -1,0 +1,173 @@
+.board-box {
+  margin-top: 3.69rem;
+  justify-content: center;
+  align-items: center;
+  display: grid;
+}
+
+.warning-text {
+  width: 45.8125rem;
+  height: 0.75rem;
+  flex-shrink: 0;
+  color: #717171;
+  font-family: Inter;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.board-total-box {
+  display: flex;
+}
+
+.board-num {
+  margin-left: 0.5rem;
+}
+
+.board-all {
+  color: #000;
+  font-family: Inter;
+  font-size: 1.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.warning-box {
+  margin-top: 1.5rem;
+}
+
+.board-num {
+  color: #ff7f1a;
+  font-family: Inter;
+  font-size: 1.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.real-board-box {
+  margin-top: 0.94rem;
+}
+
+.line {
+  width: 84.93756rem;
+  height: 0.0625rem;
+  background: #000;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.real-board-box div {
+  justify-content: space-between;
+}
+
+.real-board-box div span {
+  margin-right: 130px;
+  display: display;
+}
+
+.board-info-box {
+  display: flex;
+  color: #717171;
+  font-family: Inter;
+  font-size: 1.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  justify-content: center;
+}
+
+.real-board-name {
+  width: 6.25rem;
+  height: 3.125rem;
+  flex-shrink: 0;
+  border-radius: 2.5rem;
+  background: #58b2ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.real-board-category {
+  width: 12.5rem;
+  height: 3.125rem;
+  flex-shrink: 0;
+  border-radius: 2.5rem;
+  background: #58b2ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.real-board-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 37.5rem;
+  height: 3.125rem;
+  flex-shrink: 0;
+  border-radius: 2.5rem;
+  background: #58b2ff;
+}
+
+.title-text {
+  margin-left: 280px;
+}
+
+.num-text {
+  margin-left: 25px;
+}
+
+.cate-text {
+  margin-left: 50px;
+}
+
+.line-list {
+  margin-top: 40px;
+}
+
+.real-board-userName {
+  width: 9.375rem;
+  height: 3.125rem;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2.5rem;
+  background: #58b2ff;
+}
+
+.real-board-created {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2.5rem;
+  width: 13.75rem;
+  height: 3.125rem;
+  flex-shrink: 0;
+  background: #58b2ff;
+}
+
+.userName-text {
+  margin-left: 40px;
+}
+
+.created-text {
+  margin-left: 70px;
+}
+
+.line-list {
+  color: #717171;
+  font-family: Inter;
+  font-size: 1.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.title-span {
+  margin-right: 30px;
+}
